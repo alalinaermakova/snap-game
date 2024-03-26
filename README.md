@@ -1,6 +1,6 @@
 # Snap Game
 
-Snap Game is a web application that allows users to play the classic card game Snap. In this game, players compete to match cards based on their value or suit.
+[Snap Game](https://main--snap-game.netlify.app/) is a web application that allows users to play the classic card game Snap. In this game, players compete to match cards based on their value or suit.
 
 ## Features
 Shuffle the deck of cards.
@@ -57,9 +57,6 @@ If two consecutive cards match based on their value or suit, a snap message will
 The game keeps track of matched cards, and when all cards have been matched, the game ends.
 Contributing
 Contributions to Snap Game are welcome! If you find any issues or have suggestions for improvement, please open an issue or create a pull request on GitHub.
-
-License
-This project is licensed under the MIT License.
 
 ## Getting Started
 
