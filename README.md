@@ -3,18 +3,20 @@
 [Snap Game](https://main--snap-game.netlify.app/) is a web application that allows users to play the classic card game Snap. In this game, players compete to match cards based on their value or suit.
 
 ## Features
-Shuffle the deck of cards.
-Draw cards from the deck.
-Match cards based on their value or suit.
-Keep track of matched cards.
-Display snap messages when matches are found.
+- Shuffle the deck of cards.
+- Draw cards from the deck.
+- Match cards based on their value or suit.
+- Keep track of matched cards.
+- Display snap messages when matches are found.
 
 ## Technologies Used
 - React.js: Frontend JavaScript library for building user interfaces.
 - Next.js: React framework for server-side rendering and routing.
 - Styled-components: Library for styling React components using tagged template literals.
-- Jest and React Testing Library: For unit and integration testing of React components.
-- Deck of Cards API: API used to fetch and draw cards for the game.
+- Jest: For unit and integration testing of React components.
+- [Deck of Cards API](https://deckofcardsapi.com): API used to fetch and draw cards for the game.
+- Framer Motion: motion library for React.
+  
 ## Installation
 To run the Snap Game locally, follow these steps:
 
