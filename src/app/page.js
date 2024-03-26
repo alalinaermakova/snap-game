@@ -1,95 +1,105 @@
-import Image from "next/image";
+'use client'
+
+import { useEffect, useState } from "react";
+import { deckApi } from "@/utils/api";
+import { suitSnap, valueSnap, noSnap } from "@/utils/constants";
 import styles from "./page.module.css";
+import Card from "./components/Card";
+import SnapMessage from "./components/SnapMessage";
+import Matched from "./components/Matched";
+import Button from "./components/Button";
 
 export default function Home() {
+  const [suitMatches, setSuitMatches] = useState(0);
+  const [valueMatches, setValueMatches] = useState(0);
+  const [deck, setDeck] = useState({ 
+    deck_id: "",
+    remaining: ""
+  });
+  const [snap, setSnap] = useState(noSnap);
+  const [rightCard, setRightCard] = useState({
+    code: '',
+    image: '',
+    value: '',
+    suit: '',
+    drawn: false
+  });
+  const [leftCard, setLeftCard] = useState({
+    code: '',
+    image: '',
+    value: '',
+    suit: '',
+    drawn: false
+  });
+
+  function shuffleNewDeck() {
+    setLeftCard(prevLeftCard => ({ ...prevLeftCard, drawn: false }));
+    setRightCard(prevRightCard => ({ ...prevRightCard, drawn: false }));
+    setSnap(noSnap);
+    deckApi.getDeck()
+      .then((data) => {
+        const { deck_id, remaining } = data;
+        setDeck({ deck_id, remaining });
+      })
+      .catch((err) => {
+        console.error('Error shuffling deck:', err);
+      })
+  }
+
+  useEffect(() => {
+    shuffleNewDeck();
+  }, []);
+
+  function drawCard() {
+    deckApi.drawCard(deck.deck_id)
+      .then((data) => {
+        const newRightCard = data.cards[0]
+        const previousRightCard = rightCard
+        if (previousRightCard.drawn) {
+          setLeftCard(previousRightCard)
+        }
+        newRightCard.drawn = true
+        setRightCard(newRightCard)
+        if (newRightCard.drawn && previousRightCard.drawn) {
+          compareCards(previousRightCard, newRightCard)
+        }
+        const remainingCards = data.remaining
+        const updatedDeck = { ...deck, remaining: remainingCards };
+        setDeck(updatedDeck);
+      })
+      .catch((err) => {
+        console.error('Error drawing card:', err);
+      })
+  }
+
+  function compareCards(left, right) {
+    if(left.value === right.value) {
+      setValueMatches(valueMatches + 1)
+      setSnap(valueSnap)
+    } else if (left.suit === right.suit) {
+      setSuitMatches(suitMatches + 1)
+      setSnap(suitSnap)
+    } else {
+      setSnap(noSnap)
+    }
+  }
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+      <h1 className={styles.title}>Snap!</h1>
+      <Button onClick={() => shuffleNewDeck()}>shuffle deck</Button>
+      <p className={styles.counter}>Remaining cards: {deck.remaining}</p>
+      <SnapMessage snap={snap} valueSnap={valueSnap} suitSnap={suitSnap} />
+      <div className={styles.cardList}>
+        <Card card={leftCard} />
+        <Card card={rightCard} />
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+        {deck.remaining !== '' && deck.remaining !== 0 && (
+          <Button onClick={() => drawCard()}>draw card</Button>
+          )}
+        {deck.remaining === 0 && (
+          <Matched valueMatches={valueMatches} suitMatches={suitMatches} />
+        )}
     </main>
   );
-}
+};

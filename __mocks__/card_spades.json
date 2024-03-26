@@ -1,0 +1,17 @@
+{
+    "success": true, 
+    "deck_id": "test_deck_id", 
+    "cards": [
+        {
+            "code": "6S", 
+            "image": "https://deckofcardsapi.com/static/img/6S.png", 
+            "images": {
+                        "svg": "https://deckofcardsapi.com/static/img/6S.svg", 
+                        "png": "https://deckofcardsapi.com/static/img/6S.png"
+                    }, 
+            "value": "6", 
+            "suit": "SPADES"
+        }
+    ], 
+    "remaining": 50
+}

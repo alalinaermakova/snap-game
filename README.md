@@ -1,4 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Snap Game
+
+Snap Game is a web application that allows users to play the classic card game Snap. In this game, players compete to match cards based on their value or suit.
+
+## Features
+Shuffle the deck of cards.
+Draw cards from the deck.
+Match cards based on their value or suit.
+Keep track of matched cards.
+Display snap messages when matches are found.
+
+## Technologies Used
+React.js: Frontend JavaScript library for building user interfaces.
+Next.js: React framework for server-side rendering and routing.
+Styled-components: Library for styling React components using tagged template literals.
+Jest and React Testing Library: For unit and integration testing of React components.
+Axios: Promise-based HTTP client for making API requests.
+OpenDeck API: API used to fetch and draw cards for the game.
+Installation
+To run the Snap Game locally, follow these steps:
+
+Clone the repository to your local machine:
+```bash
+git clone <repository-url>
+```
+
+Navigate to the project directory:
+```bash
+cd snap-game
+```
+
+Install dependencies using npm or yarn:
+```bash
+npm install
+# or
+yarn install
+```
+
+Start the development server:
+```bash
+npm run dev
+# or
+yarn dev
+```
+
+Run tests:
+```bash
+npm run test
+```
+
+Open your browser and navigate to http://localhost:3000 to view the Snap Game.
+
+
+## Usage
+Click the "Shuffle Deck" button to shuffle the deck of cards.
+Click the "Draw Card" button to draw a card from the deck.
+If two consecutive cards match based on their value or suit, a snap message will be displayed.
+The game keeps track of matched cards, and when all cards have been matched, the game ends.
+Contributing
+Contributions to Snap Game are welcome! If you find any issues or have suggestions for improvement, please open an issue or create a pull request on GitHub.
+
+License
+This project is licensed under the MIT License.
 
 ## Getting Started
 
@@ -28,9 +90,3 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
