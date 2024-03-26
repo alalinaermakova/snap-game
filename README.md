@@ -1,4 +1,4 @@
-## Snap Game
+# Snap Game
 
 Snap Game is a web application that allows users to play the classic card game Snap. In this game, players compete to match cards based on their value or suit.
 
@@ -10,13 +10,12 @@ Keep track of matched cards.
 Display snap messages when matches are found.
 
 ## Technologies Used
-React.js: Frontend JavaScript library for building user interfaces.
-Next.js: React framework for server-side rendering and routing.
-Styled-components: Library for styling React components using tagged template literals.
-Jest and React Testing Library: For unit and integration testing of React components.
-Axios: Promise-based HTTP client for making API requests.
-OpenDeck API: API used to fetch and draw cards for the game.
-Installation
+- React.js: Frontend JavaScript library for building user interfaces.
+- Next.js: React framework for server-side rendering and routing.
+- Styled-components: Library for styling React components using tagged template literals.
+- Jest and React Testing Library: For unit and integration testing of React components.
+- Deck of Cards API: API used to fetch and draw cards for the game.
+## Installation
 To run the Snap Game locally, follow these steps:
 
 Clone the repository to your local machine:
