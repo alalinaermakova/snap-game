@@ -9,6 +9,7 @@ import cardMock from '../__mocks__/card.json';
 import cardSpadesMock from '../__mocks__/card_spades.json';
 import cardHeartMock from '../__mocks__/card_heart.json';
 import cardClubsMock from '../__mocks__/card_clubs.json';
+import cardLast from '../__mocks__/card_last.json';
 
 const baseUrl = deckApi._baseUrl;
 let deckId;
@@ -152,5 +153,18 @@ describe('Mock api testing to get deck info',  () => {
         await screen.findByText('Remaining cards: 50')
 
         expect(screen.queryByText('suit snap')).toBeNull();
+    });
+
+    it('button is not displayed on the screen after 52 cards', async () => {
+        render(<Home />);
+        const btnDrawCard2 = screen.getByText('draw card');
+
+        fetchMock.once(JSON.stringify(cardLast));
+
+        fireEvent.click(btnDrawCard2);
+        await screen.findByText('Remaining cards: 0')
+
+        expect(btnDrawCard2).toBeNull();
+
     });
 });

@@ -74,10 +74,10 @@ export default function Home() {
 
   function compareCards(left, right) {
     if(left.value === right.value) {
-      setValueMatches(valueMatches + 1)
+      setValueMatches(prevValueMatches => prevValueMatches + 1);
       setSnap(valueSnap)
     } else if (left.suit === right.suit) {
-      setSuitMatches(suitMatches + 1)
+      setSuitMatches(prevSuitMatches => prevSuitMatches  + 1)
       setSnap(suitSnap)
     } else {
       setSnap(noSnap)
